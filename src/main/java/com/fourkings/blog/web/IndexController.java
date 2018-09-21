@@ -1,5 +1,6 @@
 package com.fourkings.blog.web;
 
+import com.fourkings.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
