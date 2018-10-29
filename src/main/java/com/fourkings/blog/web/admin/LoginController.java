@@ -39,7 +39,7 @@ public class LoginController {
             session.setAttribute("user",user);
             return "admin/index";
         }else
-            redirectAttributes.addFlashAttribute("message","用户名和密码错误");
+            redirectAttributes.addFlashAttribute("message","用户名或密码错误");
             return "redirect:/admin";
     }
 

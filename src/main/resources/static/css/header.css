@@ -211,3 +211,9 @@ m-padded-tb-mini {
 .m-padded-left {
     padding-left: 0.2em!important;
 }
+
+.m-position-down{
+    display: flex !important;
+    position: absolute !important;
+    bottom: 0px !important;
+}
