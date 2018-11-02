@@ -23,15 +23,6 @@
             <a href="#" class="active m-item item m-mobile-hide"></i> 博客</a>
             <a href="#" class="m-item item m-mobile-hide"></i> 分类</a>
             <a href="#" class="m-item item m-mobile-hide"></i> 标签</a>
-            <!--<div class="right item m-padded-rightHeader-mini m-mobile-hide">-->
-            <!--<div class="ui circular icon">-->
-            <!--<img src="https://picsum.photos/50/50?image=1067" alt=""-->
-            <!--class="ui avatar image">-->
-            <!--</div>-->
-            <!--<div class="ui item">-->
-            <!--刘永飞-->
-            <!--</div>-->
-            <!--</div>-->
             <div class="right menu m-item m-mobile-hide">
                 <div class="ui dropdown item">
                     <div class="text">
@@ -65,8 +56,11 @@
 <!--中间内容-->
 <div class="m-padded-tb-big">
     <div class="ui container">
-        <!--header-->
-
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示</div>
+            <p th:text="${message}">恭喜，操作成功!</p>
+        </div>
         <div class="ui segment">
             <table class="ui celled table">
                 <thead>
@@ -77,14 +71,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>刻意练习清单</td>
+                <tr th:each="type,iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${type.name}">刻意练习清单</td>
                     <td>
-                        <a href="#">
+                        <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}">
                             <button class="ui teal basic button">编辑</button>
                         </a>
-                        <a href="#">
+                        <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}">
                             <button class="ui red basic button">删除</button>
                         </a>
                     </td>
@@ -93,15 +87,15 @@
                 <tfoot>
                 <tr>
                     <th colspan="6">
-                        <div class="ui mini floated pagination menu">
-                            <a class="item">
+                        <div class="ui mini floated pagination menu" th:if="${page.totalPages}>1">
+                            <a th:href="@{/admin/types(page=${page.number}-1)}" class="item" th:unless="${page.first}">
                                 上一页
                             </a>
-                            <a class="item">
+                            <a th:href="@{/admin/types(page=${page.number}+1)}" class="item" th:unless="${page.last}">
                                 下一页
                             </a>
                         </div>
-                        <a href="#" class="ui mini teal right floated basic button">新增</a>
+                        <a href="#" th:href="@{/admin/types/input}" class="ui mini teal right floated basic button">新增</a>
                     </th>
                 </tr>
                 </tfoot>
@@ -170,6 +164,14 @@
         .dropdown()
     ;
 
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function(){
+            $(this)
+                .closest('.message')
+                .transition('fade');
+            }
+        );
 </script>
 </body>
 </html>

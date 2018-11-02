@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:fragment="head(title)">
+<head th:replace="admin/_fragments :: head(~{::title})">
     <link rel="stylesheet" type="text/css" href="../../static/css/RightHeaderSearch.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/LRHeader.css"/>
     <link rel="stylesheet" href="../../static/css/header.css"/>
@@ -66,37 +66,23 @@
 <!--中间内容-->
 <div class="m-padded-tb-big">
     <div class="ui container">
-        <!--标题-->
-        <form action="#" method="post" class="ui form">
-
-            <div class="field">
-                <div id="md-content" style="z-index: 1!important;">
-                    <textarea placeholder="博客内容" name="content" style="display: none;">
-                        #### Disabled options
-- TeX (Based on KaTeX);
-- Emoji;
-- Task lists;
-- HTML tags decode;
-- Flowchart and Sequence Diagram;
-                    </textarea>
-                </div>
-            </div>
-
-            <div class="field">
+        <form action="#" method="post" th:action="@{/admin/types}" class="ui form">
+            <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal label">名称</label>
-                    <input type="text" name="indexPicture" placeholder="分类名称">
+                    <input type="text" name="name" placeholder="分类名称">
                 </div>
             </div>
-
-
             <div class="ui error message"></div>
-
+            <!--/*/<div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                <i class="close icon"></i>
+                <div class="header">验证失败</div>
+                <p th:errors="*{name}">提交信息不符合规则</p>
+            </div>/*/-->
             <div class="ui right aligned container">
                 <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-                <button class="ui teal button">提交</button>
+                <button class="ui teal submit button">提交</button>
             </div>
-
         </form>
     </div>
 </div>
@@ -106,6 +92,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 <!--底部-->
 <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-lr-mini">
@@ -161,12 +156,12 @@
         .dropdown()
     ;
     $('.ui.form').form({
-        fields:{
-            title : {
-                identifier : 'title',
-                rules:[{
-                    type:'empty',
-                    prompt:'标题：请输入博客标题'
+        fields: {
+            title: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入分类名称'
                 }]
             }
         }

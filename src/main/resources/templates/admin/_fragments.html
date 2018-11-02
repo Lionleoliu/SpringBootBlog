@@ -20,9 +20,9 @@
         <!--把想编辑的header放到一个container里面这样就可以只编辑这个container里的东西了-->
         <div class="ui inverted secondary stackable menu">         <!--菜单栏-->
             <h2 class="ui teal header item">管理后台</h2><!--设置一个头-->
-            <a href="#" class="active m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i> 博客</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i> 分类</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i> 标签</a>
+            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i> 博客</a>
+            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i> 分类</a>
+            <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i> 标签</a>
             <!--<div class="right item m-padded-rightHeader-mini m-mobile-hide">-->
             <!--<div class="ui circular icon">-->
             <!--<img src="https://picsum.photos/50/50?image=1067" alt=""-->
